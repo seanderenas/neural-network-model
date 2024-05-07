@@ -25,6 +25,8 @@
   },
   "homepage": "https://github.com/seanderenas/neural-network-model#readme",
   "dependencies": {
+    "chalk": "^4.1.2",
+    "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
     "express-ejs-layouts": "^2.5.1",

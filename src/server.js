@@ -1,11 +1,16 @@
+const chalk = require('chalk');
+
 const express = require('express'); 
-var expressLayouts = require('express-ejs-layouts');
+const expressLayouts = require('express-ejs-layouts');
 const path = require('path') 
 const app = express(); 
 const bodyParser = require('body-parser');
 const title = require('process');
+require('dotenv').config();
 
-const PORT = 3000; 
+// add environment before starting
+const PORT = process.env.SEREVER_PORT; 
+const MODE = process.env.NODE_ENV; 
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
@@ -32,10 +37,6 @@ app.get('/nn2', (req, res)=>{
 }); 
 
 app.listen(PORT, (error) =>{ 
-	if(!error) {
-		console.log("Server is Successfully Running,and App is listening on port "+ PORT)
-    } 
-	else{
-		console.log("Error occurred, server can't start", error); 
-	} 
-}); 
+	if(!error) console.log(chalk.green.bgBlack(`Server running at port: ${chalk.underline.bold(PORT)} in ${chalk.underline.bold(MODE)} mode : ${chalk.underline.bold(new Date().toUTCString())}`))
+	else console.log(chalk.red(`Error occurred, server can't start: ${error}`)); 
+});

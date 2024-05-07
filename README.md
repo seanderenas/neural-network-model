@@ -14,14 +14,14 @@ $ git clone https://github.com/seanderenas/neural-network-model.git
 ```
 > Second, do this 
 ```
-npm init
+$ npm init
 ```
 > Continue on with 
 ```
-npm install 
+& npm install 
 ```
 > Lastly, start the server with 
 ```
-node .\src\server.js
+$ node .\src\server.js
 ```
-This should downlaod the files, initialize & installl node_modules, and start the server at [URL](localhost:3000) 
+This should downlaod the files, initialize & installl node_modules, and start the server at localhost:3000
