@@ -1,4 +1,5 @@
 const chalk = require('chalk');
+const synaptic = require('synaptic'); // this line is not needed in the browser
 
 const express = require('express'); 
 const expressLayouts = require('express-ejs-layouts');
@@ -22,6 +23,11 @@ app.use(expressLayouts);
 app.use(express.static(__dirname + '/public'));
 //app.use('/public/images', express.static(__dirname + '/public/images'));
 
+app.use('/', (req, res, next) => {
+	console.log(chalk.blue(`| IP ${chalk.underline.bold(req.ip)} | Path ${chalk.underline.bold(req.path)} | Method ${chalk.underline.bold(req.method)} |`))
+	next()
+})
+
 app.get('/', (req, res)=>{ 
 	res.render('index', {title: 'Neural Networks!', description: 'Home page that will direct you to the different kinds of neural networks and how to learn them.'} )
 });
@@ -37,6 +43,6 @@ app.get('/nn2', (req, res)=>{
 }); 
 
 app.listen(PORT, (error) =>{ 
-	if(!error) console.log(chalk.green.bgBlack(`Server running at port: ${chalk.underline.bold(PORT)} in ${chalk.underline.bold(MODE)} mode : ${chalk.underline.bold(new Date().toUTCString())}`))
+	if(!error) console.log(chalk.green.bgBlack(`\n Server running at port: ${chalk.underline.bold(PORT)} in ${chalk.underline.bold(MODE)} mode : ${chalk.underline.bold(new Date().toUTCString())} \n`))
 	else console.log(chalk.red(`Error occurred, server can't start: ${error}`)); 
 });
