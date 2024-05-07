@@ -44,5 +44,5 @@ app.get('/nn2', (req, res)=>{
 
 app.listen(PORT, (error) =>{ 
 	if(!error) console.log(chalk.green.bgBlack(`\n Server running at port: ${chalk.underline.bold(PORT)} in ${chalk.underline.bold(MODE)} mode : ${chalk.underline.bold(new Date().toUTCString())} \n`))
-	else console.log(chalk.red(`Error occurred, server can't start: ${error}`)); 
+	else console.log(chalk.red(`Error occurred, server can't start: ${chalk.underline.bold(error)}`)); 
 });

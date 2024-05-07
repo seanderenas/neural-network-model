@@ -58,7 +58,8 @@ async function XORNeuralNetwork(userHiddenLayers, userLearningRate) {
 
     // train the network - learn XOR
     var learningRate = userLearningRate;
-    for (let i=0; i<20000; i++)
+    let solved = false
+    for (var i=0; !(Math.round(myNetwork.activate([0,0])) == 0 && Math.round(myNetwork.activate([1,1])) == 0 && Math.round(myNetwork.activate([0,1])) == 1 && Math.round(myNetwork.activate([1,0])) == 1) ; i++)
     {
         // 0,0 => 0
         myNetwork.activate([0,0]);
@@ -75,8 +76,12 @@ async function XORNeuralNetwork(userHiddenLayers, userLearningRate) {
         // 1,1 => 0
         myNetwork.activate([1,1]);
         myNetwork.propagate(learningRate, [0]);
+
+        
+        
     }
 
+    outputs.innerHTML += `<p> ${i} </p>`;
     outputs.innerHTML += `<p> running neural network </p>`;
     await new Promise(r => setTimeout(r, 2000));
     outputs.innerHTML = ``;
