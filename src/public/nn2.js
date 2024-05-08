@@ -1,0 +1,1 @@
+console.log('nn2.js loaded client-side');

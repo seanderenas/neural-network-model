@@ -29,7 +29,7 @@ app.use('/', (req, res, next) => {
 })
 
 app.get('/', (req, res)=>{ 
-	res.render('index', {title: 'Neural Networks!', description: 'Home page that will direct you to the different kinds of neural networks and how to learn them.'} )
+	res.render('index', {title: 'Neural Networks Home Page!', description: 'Home page that will direct you to the different kinds of neural networks and how to learn them.'} )
 });
 
 app.get('/nn0', (req, res)=>{ 
