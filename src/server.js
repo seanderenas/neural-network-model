@@ -1,5 +1,4 @@
 const chalk = require('chalk');
-const synaptic = require('synaptic'); // this line is not needed in the browser
 
 const express = require('express'); 
 const expressLayouts = require('express-ejs-layouts');
@@ -31,7 +30,6 @@ app.use('/', (req, res, next) => {
 app.get('/', (req, res)=>{ 
 	res.render('index', {title: 'Neural Networks Home Page!', description: 'Home page that will direct you to the different kinds of neural networks and how to learn them.'} )
 });
-
 app.get('/nn0', (req, res)=>{ 
     res.render('nn0', {title: 'Nueral Network One', description: 'Nueral Network One Description'}) 
 }); 
