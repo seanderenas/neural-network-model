@@ -52,11 +52,11 @@ function train() {
 
         // now we compare the model prediction with the target
         // this is the difference between pred and target squared
-        let cost = (pred - target) ** 2;
+        let cost = (pred - target) ** 2; // idk why this is here, its not used
 
         // now we find the slope of the cost w.r.t. each parameter (w1, w2, b)
         // bring derivative through square function
-        let dcost_dpred = 2 * (pred - target); // idk why this is here, its not used
+        let dcost_dpred = 2 * (pred - target); 
 
         // bring derivative through sigmoid
         // derivative of sigmoid can be written using more sigmoids! d/dz sigmoid(z) = sigmoid(z)*(1-sigmoid(z))
@@ -79,10 +79,8 @@ function train() {
         w2 -= learning_rate * dcost_dw2;
         b -= learning_rate * dcost_db;
     }
-
     return {w1: w1, w2: w2, b: b};
 }
-
 
 document.querySelector('#flowersNN').addEventListener('submit', (event) => {
     event.preventDefault()
@@ -101,13 +99,7 @@ document.querySelector('#flowersNN').addEventListener('submit', (event) => {
     //output.innerHTML += `<h3> ${model_out} </h3>`
 });
 
-
-
-
-
-
-
-/* ~~~~ beginner NN code ~~~~~~ 
+/* ~~~~ beginner NN code ~~~~~~ */
 function training(prediction, target){
     let b = prediction;
     for(let i=0; i<500; i++){
@@ -136,4 +128,4 @@ function beginnerNN(m1, m2, w1, w2, b){
     z = ((m1 * w1) + (m2 * w2)) + b;
     return sigmoid(z)
 }
- ~~~~ beginner NN code ~~~~~~ */
+/* ~~~~ beginner NN code ~~~~~~ */
