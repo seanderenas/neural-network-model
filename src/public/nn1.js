@@ -1,5 +1,5 @@
 /*
-    
+
     JS NN i based off https://jsfiddle.net/wbkgb73v/ 
 
 */
@@ -18,12 +18,14 @@ var dataR3 = [4,1.5,1];
 var dataR4 = [5.5,1,1];
 
 //unknown type (data we want to find)
-var dataU = [4.5,  1, "it should be 1"];
+var dataU = [4.5,1,"it should be 1"];
 
 var all_points = [dataB1, dataB2, dataB3, dataB4, dataR1, dataR2, dataR3, dataR4];
 
-function sigmoid(x) {
-  return 1/(1+Math.exp(-x));
+function sigmoid(num){
+    // sigmoid/logistic function f(x) = 1/(1 + e^-x)
+    // takes any number and squashes it between 0-1 
+    return 1/(1+ Math.exp(-num));
 }
 
 // training
@@ -37,21 +39,24 @@ function train() {
     let learning_rate = 0.2;
 
     for (let iter = 0; iter < 50000; iter++) {
-        // pick a random point
+        // pick a random point to start the training on
         let random_idx = Math.floor(Math.random() * all_points.length);
         let point = all_points[random_idx];
-        let target = point[2]; // target stored in 3rd coord of points
+        // target stored in 3rd index of points
+        let target = point[2]; 
 
-        // feed forward
+        // feed forward or 'activate' aka do the calc.'s with 
+        // weights and bias then squash it in sigmoid func.
         let z = w1 * point[0] + w2 * point[1] + b;
         let pred = sigmoid(z);
 
         // now we compare the model prediction with the target
+        // this is the difference between pred and target squared
         let cost = (pred - target) ** 2;
 
         // now we find the slope of the cost w.r.t. each parameter (w1, w2, b)
         // bring derivative through square function
-        let dcost_dpred = 2 * (pred - target);
+        let dcost_dpred = 2 * (pred - target); // idk why this is here, its not used
 
         // bring derivative through sigmoid
         // derivative of sigmoid can be written using more sigmoids! d/dz sigmoid(z) = sigmoid(z)*(1-sigmoid(z))
@@ -79,6 +84,29 @@ function train() {
 }
 
 
+document.querySelector('#flowersNN').addEventListener('submit', (event) => {
+    event.preventDefault()
+    let userLengthInput = document.querySelector('#userLengthInput').value;
+    let userWidthInput = document.querySelector('#userWidthInput').value;
+    console.log(`Length: ${userLengthInput} | Width: ${userWidthInput}`);
+   
+    let params = train();
+    let model_out = sigmoid( userLengthInput * params.w1 + userWidthInput * params.w2 + params.b );
+    console.log(model_out);
+    let output = document.querySelector('#nn1Outputs');
+
+    if(Math.round(model_out*100)/100 === 0) output.innerHTML += `<h5 style="" > Blue, target 0 | predicted number: ${model_out} </h5>`
+    else output.innerHTML += `<h5> Red, target 1 | predicted number: ${model_out} </h5>`
+
+    //output.innerHTML += `<h3> ${model_out} </h3>`
+});
+
+
+
+
+
+
+
 /* ~~~~ beginner NN code ~~~~~~ 
 function training(prediction, target){
     let b = prediction;
@@ -100,11 +128,7 @@ function squaredErrorCost(prediction, target){
     return Math.pow(error, 2); 
 }
 
-function sigmoid(num){
-    // sigmoid/logistic function f(x) = 1/(1 + e^-x)
-    // takes any number and squashes it between 0-1 
-    return 1/(1+ Math.exp(-num));
-}
+
 
 function beginnerNN(m1, m2, w1, w2, b){
     // two input neurons, one output with weights and bias

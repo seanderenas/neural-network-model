@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(expressLayouts);
 app.use(express.static(__dirname + '/public'));
-//app.use('/public/images', express.static(__dirname + '/public/images'));
+app.use('/public/images', express.static(__dirname + '/public/images'));
 
 app.use('/', (req, res, next) => {
 	console.log(chalk.blue(`| IP ${chalk.underline.bold(req.ip)} | Path ${chalk.underline.bold(req.path)} | Method ${chalk.underline.bold(req.method)} |`))
