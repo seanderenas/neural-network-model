@@ -38,7 +38,7 @@ function train() {
     //small learning rate, can be hard coded to different value
     let learning_rate = 0.2;
 
-    for (let iter = 0; iter < 50000; iter++) {
+    for (let iter = 0; iter < 2500000; iter++) {
         // pick a random point to start the training on
         let random_idx = Math.floor(Math.random() * all_points.length);
         let point = all_points[random_idx];
@@ -81,20 +81,27 @@ function train() {
     }
     return {w1: w1, w2: w2, b: b};
 }
+let firstTrain = false;
+let params;
 
 document.querySelector('#flowersNN').addEventListener('submit', (event) => {
     event.preventDefault()
+    
+    if(!firstTrain){
+       params = train();
+       firstTrain = true;
+    }
     let userLengthInput = document.querySelector('#userLengthInput').value;
     let userWidthInput = document.querySelector('#userWidthInput').value;
     console.log(`Length: ${userLengthInput} | Width: ${userWidthInput}`);
    
-    let params = train();
+   
     let model_out = sigmoid( userLengthInput * params.w1 + userWidthInput * params.w2 + params.b );
     console.log(model_out);
     let output = document.querySelector('#nn1Outputs');
 
-    if(Math.round(model_out*100)/100 === 0) output.innerHTML += `<h5 style="" > Blue, target 0 | predicted number: ${model_out} </h5>`
-    else output.innerHTML += `<h5> Red, target 1 | predicted number: ${model_out} </h5>`
+    if(Math.round(model_out*100)/100 === 0) output.innerHTML += `<h5 style="color: blue !important;" > Blue, target 0 | predicted number: ${Number.parseFloat(model_out).toFixed(100)} </h5>`;
+    else output.innerHTML += `<h5 style="color: red !important;"> Red, target 1 | predicted number: ${Number.parseFloat(model_out).toFixed(20)} </h5>`;
 
     //output.innerHTML += `<h3> ${model_out} </h3>`
 });
@@ -108,20 +115,15 @@ function training(prediction, target){
     }
     console.log(`target: ${target}\ncalculated num: ${b}`);
 }
-
 function slope(prediction, target) {
     // derivative of (pred. - targ.)^2
     return 2 * (prediction - target);
 }
-
 function squaredErrorCost(prediction, target){ 
     // difference of prediction and target squared
     error = prediction - target;
     return Math.pow(error, 2); 
 }
-
-
-
 function beginnerNN(m1, m2, w1, w2, b){
     // two input neurons, one output with weights and bias
     // data enrty one * weight one, smae with two and then add bias 
