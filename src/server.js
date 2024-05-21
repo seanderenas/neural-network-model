@@ -1,7 +1,8 @@
 const chalk = require('chalk');
 const express = require('express'); 
 const expressLayouts = require('express-ejs-layouts');
-const path = require('path') 
+const path = require('path') ;
+const favicon = require('serve-favicon');
 const app = express(); 
 const bodyParser = require('body-parser');
 const title = require('process');
@@ -20,6 +21,7 @@ app.use(bodyParser.json());
 app.use(expressLayouts);
 app.use(express.static(__dirname + '/public'));
 app.use('/public/images', express.static(__dirname + '/public/images'));
+app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
 app.use('/', (req, res, next) => {
 	console.log(chalk.blue(`| IP ${chalk.underline.bold(req.ip)} | Path ${chalk.underline.bold(req.path)} | Method ${chalk.underline.bold(req.method)} |`))
