@@ -91,10 +91,10 @@ document.querySelector('#flowersNN').addEventListener('submit', (event) => {
        params = train();
        firstTrain = true;
     }
+
     let userLengthInput = document.querySelector('#userLengthInput').value;
     let userWidthInput = document.querySelector('#userWidthInput').value;
     console.log(`Length: ${userLengthInput} | Width: ${userWidthInput}`);
-   
    
     let model_out = sigmoid( userLengthInput * params.w1 + userWidthInput * params.w2 + params.b );
     console.log(model_out);
@@ -103,10 +103,9 @@ document.querySelector('#flowersNN').addEventListener('submit', (event) => {
     if(Math.round(model_out*100)/100 === 0) output.innerHTML += `<h5 style="color: blue !important;" > Blue, target 0 | predicted number: ${Number.parseFloat(model_out).toFixed(100)} </h5>`;
     else output.innerHTML += `<h5 style="color: red !important;"> Red, target 1 | predicted number: ${Number.parseFloat(model_out).toFixed(20)} </h5>`;
 
-    //output.innerHTML += `<h3> ${model_out} </h3>`
 });
 
-/* ~~~~ beginner NN code ~~~~~~ */
+/* ~~~~ beginner NN code, not used but public ~~~~~~ */
 function training(prediction, target){
     let b = prediction;
     for(let i=0; i<500; i++){
