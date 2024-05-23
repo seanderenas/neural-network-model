@@ -100,8 +100,8 @@ document.querySelector('#flowersNN').addEventListener('submit', (event) => {
     console.log(model_out);
     let output = document.querySelector('#nn1Outputs');
 
-    if(Math.round(model_out*100)/100 === 0) output.innerHTML += `<h5 style="color: blue !important;" > Blue, target 0 | predicted number: ${Number.parseFloat(model_out).toFixed(100)} </h5>`;
-    else output.innerHTML += `<h5 style="color: red !important;"> Red, target 1 | predicted number: ${Number.parseFloat(model_out).toFixed(20)} </h5>`;
+    if(Math.round(model_out*100)/100 === 0) output.innerHTML += `<h5 style="color: blue !important;" > Blue, target 0 | predicted number: ${Number.parseFloat(model_out).toFixed(20)} </h5>`;
+    else output.innerHTML += `<h5 style="color: red !important;"> Red, target 1 | predicted number: ${model_out} </h5>`;
 
 });
 
